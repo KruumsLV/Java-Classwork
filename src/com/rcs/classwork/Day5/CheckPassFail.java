@@ -6,7 +6,7 @@ public class CheckPassFail {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("ievadiet x :");
+        System.out.println("Ievadiet x :");
         int x = scanner.nextInt();
         scanner.close();
         if (x >= 50) {
