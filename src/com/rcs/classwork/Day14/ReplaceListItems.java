@@ -11,6 +11,7 @@ public class ReplaceListItems {
 
         // 1.) Nejauši izvēlēties saraksta garumu
         // Random, robežās no 5 līdz 20 ieskaitot (N)
+
         int n = random.nextInt(16) + 5;
 
         // 2.) Pieškirat numberList sarakstam N elementus
