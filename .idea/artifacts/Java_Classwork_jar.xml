@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Java-Classwork:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Java_Classwork_jar</output-path>
+    <root id="archive" name="Java-Classwork.jar">
+      <element id="module-output" name="Java-Classwork" />
+    </root>
+  </artifact>
+</component>

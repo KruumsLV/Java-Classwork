@@ -1,26 +1,23 @@
 package com.rcs.classwork.Day21.customerAccounts;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import com.rcs.classwork.Day21.HelperClasses.AccountStorage;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Program {
-    public static void main(String[] args) {
-        List<Account> accountList = new ArrayList<>();
-        try {
-            FileInputStream inputStream = new FileInputStream("accounts");
-            ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-            accountList = (ArrayList)objectInputStream.readObject();
-            objectInputStream.close();
-            inputStream.close();
-        } catch (Exception ex) {
-            //ex.printStackTrace();
+
+    private final static String fileName = "accounts";
+
+    public static void displayAccounts(List<Account> accounts) {
+        for (Account account : accounts) {
+            System.out.println(account);
         }
+    }
+
+    public static void main(String[] args) {
+        List<Account> accountList = AccountStorage.readFromFile(fileName);
+        displayAccounts(accountList);
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Veiciet kontu ievadi.");
@@ -41,10 +38,9 @@ public class Program {
             double balance = scanner.nextDouble();
             scanner.nextLine();
 
-            Account account = new Account(id, IBAN,
-                    new Customer(id, name, surname, LocalDate.parse(dateInput)),
-                    balance);
-            accountList.add(account);
+            accountList.add(new Account(id, IBAN,
+                            new Customer(id, name, surname, LocalDate.parse(dateInput)),
+                            balance));
             id++;
 
             System.out.print("Turpināt? (N):");
@@ -54,18 +50,15 @@ public class Program {
             }
         }
 
+        displayAccounts(accountList);
         for(Account account : accountList) {
+            account.deposit(10);
+            account.withdraw(19.99);
+            if (account.getId() == 1) {
+                account.deposit(50);
+            }
             System.out.println(account);
         }
-
-        try {
-            FileOutputStream fileStream = new FileOutputStream("accounts");
-            ObjectOutputStream objectStream = new ObjectOutputStream(fileStream);
-            objectStream.writeObject(accountList);
-            objectStream.close();
-            fileStream.close();
-        } catch (Exception ex) {
-           ex.printStackTrace();
-        }
+        AccountStorage.saveToFile(accountList, fileName);
     }
 }
