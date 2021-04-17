@@ -12,4 +12,9 @@ public class Address {
         this.street = street;
         this.houseNr = houseNr;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s, %s, %s %d", country, city, street, houseNr);
+    }
 }

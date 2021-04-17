@@ -1,8 +1,13 @@
 package com.rcs.classwork.Day22;
 
 public abstract class StoreItem {
-    private double price;
-    private int quantity;
+    protected double price;
+    protected int quantity;
+
+    StoreItem(double price, int quantity) {
+        this.price = price;
+        this.quantity = quantity;
+    }
 
     public double getFullPrice() {
         return price;
